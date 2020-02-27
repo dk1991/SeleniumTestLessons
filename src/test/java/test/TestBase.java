@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import page.Main;
 import page.TaskOne;
+import page.TaskSix;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +16,7 @@ public class TestBase {
     WebDriver driver;
     public Main main;
     public TaskOne taskOne;
+    public TaskSix taskSix;
 
     // Выполнится перед каждым тестовым методом
     @BeforeEach
@@ -26,6 +28,7 @@ public class TestBase {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // ожидание элемента на странице(если не виден)
         main = PageFactory.initElements(driver, Main.class);
         taskOne = PageFactory.initElements(driver, TaskOne.class);
+        taskSix = PageFactory.initElements(driver, TaskSix.class);
     }
 
     // Выполнится после каждого тестового метода
