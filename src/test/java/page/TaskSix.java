@@ -12,13 +12,18 @@ public class TaskSix extends BasePage {
     }
 
     public TaskSix fillInLogin(String login) throws InterruptedException {
-        sleep(500);
+        sleep(500); //SLEEP ЛУЧШЕ НЕ ИСПОЛЬЗОВАТЬ, ЛУЧШЕ ПОИСКАТЬ ЭЛЕМЕНТЫ:
+        /*
+        isElementDisplayed(By.id("LoginForm__username"));
+        isElementDisplayed(By.name("LoginForm[_password]"));
+        isElementDisplayed(By.cssSelector(".btn-default.btn"));
+         */
+
         writeText(By.id("LoginForm__username"), login);
         return this;
     }
 
     public TaskSix fillInPassword(String password) {
-        // короткая запись
         writeText(By.name("LoginForm[_password]"), password);
         return this;
     }
@@ -32,5 +37,13 @@ public class TaskSix extends BasePage {
     public void isLoginCorrect() {
         isElementDisplayed(By.linkText("Pobierz plik"));
 //        driver.findElement(By.linkText("Pobierz plik")).isDisplayed();
+    }
+
+    public TaskSix checkAllElementsOnPagePresent() {
+        isElementDisplayed(By.id("LoginForm__username"));
+        isElementDisplayed(By.name("LoginForm[_password]"));
+        isElementDisplayed(By.cssSelector(".btn-default.btn"));
+
+        return this;
     }
 }

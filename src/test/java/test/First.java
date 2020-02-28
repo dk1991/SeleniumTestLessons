@@ -9,5 +9,6 @@ public class First extends TestBase {
         main    .goTo()
                 .chooseTask("1");
         taskOne.checkPageIsCorrect();
+        taskOne.scrollToElement("Kostka");
     }
 }
