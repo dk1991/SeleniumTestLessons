@@ -1,8 +1,6 @@
 package test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -18,8 +16,7 @@ public class TestBase {
     public TaskOne taskOne;
     public TaskSix taskSix;
 
-    // Выполнится перед каждым тестовым методом
-    @BeforeEach
+
     public void start() {
         // проверяем ОС, выбираем тип драйвера Chrome и скачиваем последнюю версию драйвера
         WebDriverManager.chromedriver().setup();
@@ -31,8 +28,7 @@ public class TestBase {
         taskSix = PageFactory.initElements(driver, TaskSix.class);
     }
 
-    // Выполнится после каждого тестового метода
-    @AfterEach
+
     public void finish() {
         driver.quit();
     }

@@ -11,8 +11,12 @@ public class TaskSix extends BasePage {
         super(driver);
     }
 
-    public TaskSix fillInLogin(String login) throws InterruptedException {
-        sleep(500); //SLEEP ЛУЧШЕ НЕ ИСПОЛЬЗОВАТЬ, ЛУЧШЕ ПОИСКАТЬ ЭЛЕМЕНТЫ:
+    public TaskSix fillInLogin(String login) {
+        try {
+            sleep(500); //SLEEP ЛУЧШЕ НЕ ИСПОЛЬЗОВАТЬ, ЛУЧШЕ ПОИСКАТЬ ЭЛЕМЕНТЫ:
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         /*
         isElementDisplayed(By.id("LoginForm__username"));
         isElementDisplayed(By.name("LoginForm[_password]"));
@@ -29,7 +33,8 @@ public class TaskSix extends BasePage {
     }
 
     public TaskSix loginButtonClick() {
-        click(By.cssSelector(".btn-default.btn"));
+        click(By.xpath("//button[text()='Login']")); // так более понятно что за кнопка
+        //click(By.cssSelector(".btn-default.btn"));
 //        driver.findElement(By.cssSelector(".btn-default.btn")).click(); // . в начале означает "class", вторая . вместо пробела
         return this;
     }
