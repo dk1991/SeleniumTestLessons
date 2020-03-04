@@ -37,8 +37,12 @@ public class StepsDefinition extends TestBase {
                 .loginButtonClick();
     }
 
-    @Then("I should see the link to download file")
-    public void iShouldSeeTheLinkToDownloadFile() {
-        taskSix.isLoginCorrect();
+    @Then("I should (see|not see) the link to download file$")
+    public void iShouldSeeTheLinkToDownloadFile(String visibility) {
+        if (visibility.equals("see")) {
+            taskSix.isLoginCorrect();
+        } else {
+            taskSix.isLoginWrong();
+        }
     }
 }

@@ -22,7 +22,8 @@ public class TestBase {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(); // инициализация объекта для Chrome драйвера
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // ожидание элемента на странице(если не виден)
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS); // ожидание элемента на странице(если не виден)
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS); // ожидание загрузки страницы
         main = PageFactory.initElements(driver, Main.class);
         taskOne = PageFactory.initElements(driver, TaskOne.class);
         taskSix = PageFactory.initElements(driver, TaskSix.class);

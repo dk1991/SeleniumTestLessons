@@ -2,8 +2,12 @@ package page;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static java.lang.Thread.sleep;
+import static org.junit.Assert.assertFalse;
 
 public class TaskSix extends BasePage {
 
@@ -48,6 +52,13 @@ public class TaskSix extends BasePage {
         isElementDisplayed(By.id("LoginForm__username"));
         isElementDisplayed(By.name("LoginForm[_password]"));
         isElementDisplayed(By.cssSelector(".btn-default.btn"));
+
+        return this;
+    }
+
+    public TaskSix isLoginWrong() {
+        //List<WebElement> elements = driver.findElements(By.linkText("Pobierz plik"));
+        isElementNotDisplayed(By.linkText("Pobierz plik"));
 
         return this;
     }
