@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
 
 
 public class BasePage {
@@ -34,12 +33,10 @@ public class BasePage {
     // Is element displayed
     public void isElementDisplayed(By elementBy) {
         waitVisibility(elementBy);
-        assertTrue(driver.findElement(elementBy).isDisplayed()); // ищем элемент и сравниваем с true
+        //assertTrue(driver.findElement(elementBy).isDisplayed()); // ищем элемент и сравниваем с true
     }
 
-    public void isElementNotDisplayed(By elementBy) {
-        assertFalse(driver.findElements(elementBy).size() > 0);
-    }
+
 
     public void waitForFilling(By elementBy) {
         wait.until(ExpectedConditions.elementToBeClickable(elementBy));
