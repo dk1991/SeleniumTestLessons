@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
+import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SimpleTest {
@@ -25,6 +26,7 @@ public class SimpleTest {
         driver = new ChromeDriver(options); // инициализация объекта для Chrome драйвера
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); // ожидание элемента на странице(если не виден)
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.get(SITE_URL);
     }
 
@@ -44,10 +46,13 @@ public class SimpleTest {
     }
 
     @Test
-    public void testSixCheckLoginWithIncorrectCredentials() {
+    public void testSixCheckLoginWithIncorrectCredentials() throws InterruptedException {
         driver.findElement(By.linkText("Zadanie 6")).click();
+        sleep(2000);
         driver.findElement(By.id("LoginForm__username")).sendKeys("tester");
+        sleep(2000);
         driver.findElement(By.name("LoginForm[_password]")).sendKeys("12,4-xyz");
+        sleep(2000);
         driver.findElement(By.id("LoginForm_save")).click();
         assertTrue(driver.findElements(By.linkText("Pobierz plik")).isEmpty());
     }
