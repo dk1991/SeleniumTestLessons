@@ -1,4 +1,5 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,24 +37,65 @@ public class SimpleTest {
         driver.quit();
     }
 
+    @Epic("TESTING FOR https://testingcup.pgs-soft.com/ tasks") // общее название теста
+    @Feature(value = "Test for task 6") // название теста
+    @Severity(SeverityLevel.BLOCKER) // Позволяет указать уровень критичности функционала, проверяемого автотестом
+    @Description("In this test we will login with correct credentials. When we logged we can see link for file") // описание теста
+    @Story(value = "Test for login with correct credentials")
     @Test
-    public void testSixCheckLoginWithCorrectCredentials() {
-        driver.findElement(By.linkText("Zadanie 6")).click();
-        driver.findElement(By.id("LoginForm__username")).sendKeys("tester");
-        driver.findElement(By.name("LoginForm[_password]")).sendKeys("123-xyz");
-        driver.findElement(By.id("LoginForm_save")).click();
-        assertTrue(driver.findElements(By.linkText("Pobierz plik")).isEmpty());
+    public void testSixCheckLoginWithCorrectCredentials() throws InterruptedException {
+        chooseTaskSix();
+        fillInLogin("tester");
+        fillInPassword("123-xyz");
+        clickLoginButton();
+        isLoginSuccessful();
     }
 
+    @Epic("TESTING FOR https://testingcup.pgs-soft.com/ tasks")
+    @Feature(value = "Test for task 6")
+    @Severity(SeverityLevel.MINOR)
+    @Description("In this test we will login with incorrect credentials. We will get error because of wrong password")
+    @Story(value = "Test for login with incorrect credentials")
     @Test
     public void testSixCheckLoginWithIncorrectCredentials() throws InterruptedException {
-        driver.findElement(By.linkText("Zadanie 6")).click();
-        sleep(2000);
-        driver.findElement(By.id("LoginForm__username")).sendKeys("tester");
-        sleep(2000);
-        driver.findElement(By.name("LoginForm[_password]")).sendKeys("12,4-xyz");
-        sleep(2000);
+        chooseTaskSix();
+        fillInLogin("tester");
+        fillInPassword("124-xyw");
+        clickLoginButton();
+        isLoginUnsuccessful();
+    }
+
+    @Step(value = "Fill in login with {0}") // Описание шага теста. Вместо {0} подставится login из метода
+    public void fillInLogin(String login) throws InterruptedException {
+        sleep(1000);
+        driver.findElement(By.id("LoginForm__username")).sendKeys(login);
+    }
+
+    @Step(value = "Fill in password with {0}")
+    public void fillInPassword(String password) throws InterruptedException {
+        sleep(1000);
+        driver.findElement(By.name("LoginForm[_password]")).sendKeys(password);
+    }
+
+    @Step(value = "Click button Login")
+    public void clickLoginButton() throws InterruptedException {
+        sleep(1000);
         driver.findElement(By.id("LoginForm_save")).click();
+    }
+
+    @Step(value = "Choose task 6 on main page")
+    public void chooseTaskSix() throws InterruptedException {
+        sleep(1000);
+        driver.findElement(By.linkText("Zadanie 6")).click();
+    }
+
+    @Step(value = "Login was successful")
+    public void isLoginSuccessful() {
+        assertTrue(driver.findElement(By.linkText("Pobierz plik")).isDisplayed());
+    }
+
+    @Step(value = "Login was not successful")
+    public void isLoginUnsuccessful() {
         assertTrue(driver.findElements(By.linkText("Pobierz plik")).isEmpty());
     }
 }
